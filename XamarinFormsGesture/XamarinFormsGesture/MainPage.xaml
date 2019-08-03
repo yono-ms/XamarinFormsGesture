@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="XamarinFormsGesture.MainPage"
+             x:Name="contentPage">
+
+    <RelativeLayout BindingContext="{x:Reference contentPage}">
+        <Label
+            x:Name="label"
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}"
+            RelativeLayout.HeightConstraint="{ConstraintExpression Type=Constant, Constant=20}"
+            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X}"
+            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5}"
+            Text="Welcome to Xamarin.Forms!" />
+        <Button
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}"
+            RelativeLayout.HeightConstraint="{ConstraintExpression Type=Constant, Constant=40}"
+            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X}"
+            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=label, Property=Y, Constant=40}"
+            Text="Toggle"
+            Command="{Binding Command}"/>
+        <Grid
+            x:Name="floatGrid"
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=Constant, Constant=200}"
+            RelativeLayout.HeightConstraint="{ConstraintExpression Type=Constant, Constant=200}"
+            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X}"
+            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Y}"
+            BackgroundColor="Gray"
+            Padding="16"
+            TranslationX="{Binding TranslationXFloat}"
+            TranslationY="{Binding TranslationYFloat}"
+            IsVisible="{Binding IsVisibleFloat}">
+            <Grid.GestureRecognizers>
+                <PanGestureRecognizer PanUpdated="PanGestureRecognizer_PanUpdated"/>
+            </Grid.GestureRecognizers>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Row="0"
+                Text="Floating Window"/>
+            <BoxView
+                Grid.Row="1"
+                WidthRequest="100"
+                HeightRequest="100"
+                BackgroundColor="Red"/>
+        </Grid>
+    </RelativeLayout>
+
+</ContentPage>
